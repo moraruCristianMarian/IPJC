@@ -1,7 +1,8 @@
-# IPJC
-Proiect la Introducere in Programarea Jocurilor pe Calculator
+# The Relativity Paradox: Einstein's Odyssey 💫🧪
+Unity Game design project for Introduction to Game Design Course
 
-Echipa:
+## About
+Team:
 * Ciocan Alexandra-Diana
 * Georgescu Miruna-Bianca
 * Moraru Cristian-Marian

@@ -15,7 +15,7 @@ public class Miscare : MonoBehaviour
     [SerializeField]
     public float FortaSaritura = 300;
     [SerializeField]
-    public float VitezaMiscare = 4;
+    public float VitezaMiscare = 20;
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +40,6 @@ public class Miscare : MonoBehaviour
         // Aplicam vectorul obtinut la translatie
         transform.Translate(miscareOrizontalaVector); 
 
-
         // Saritura
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))
         {
@@ -53,5 +52,10 @@ public class Miscare : MonoBehaviour
         // Debug - resetare pozitie
         if (Input.GetKeyDown(KeyCode.R))
             transform.position = new Vector3(-3.25f, -1.25f, -10f);
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 }

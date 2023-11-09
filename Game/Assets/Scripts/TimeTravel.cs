@@ -48,8 +48,7 @@ public class TimeTravel : MonoBehaviour
             _myRigidbody.velocity = Vector3.zero;
 
             // Update the direction of gravity to match the past clone's
-            _gravityScript.GravityAngle = _pastClone.transform.rotation.eulerAngles.z - 90;
-            _gravityScript.ModifyGravity(true);
+            _gravityScript.AdjustGravityAngle(_pastClone.transform.rotation.eulerAngles.z - 90, true);
 
             // Destroy the past clone and disable this script
             Destroy(_pastClone);

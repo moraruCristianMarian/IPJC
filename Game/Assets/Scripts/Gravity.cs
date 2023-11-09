@@ -15,41 +15,29 @@ public class Gravity : MonoBehaviour
 
     // How quickly the player can rotate the direction of gravity with the arrow keys
     [SerializeField]
-    private float _gravityRotationSpeed = 40.0f; 
+    private float _gravityRotationSpeed = 30.0f; 
 
 
 
     void Start()
     {
         GravityAngle = 270;
-        ModifyGravity(true);
+        ModifyGravity();
     }
 
-    void Update()
+
+    public void AdjustGravityAngle(float amount, bool replaceValue = false)
     {
-        ModifyGravity(false);
+        if (replaceValue)
+            GravityAngle = amount;
+        else
+            GravityAngle += amount * _gravityRotationSpeed * Time.deltaTime;
+
+        ModifyGravity();
     }
 
-    // If "forceUpdate" is true, the entire function will execute (used for initialization, & from scripts like TimeTravel)
-    public void ModifyGravity(bool forceUpdate)
+    public void ModifyGravity()
     {   
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            GravityAngle += _gravityRotationSpeed * Time.deltaTime;
-            forceUpdate = true;
-        }
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            GravityAngle -= _gravityRotationSpeed * Time.deltaTime;
-            forceUpdate = true;
-        }
-
-        // If an arrow wasn't pressed, and the function wasn't called with forceUpdate = true, it is not necessary to execute
-        // the rest of this function, since the gravity angle was not modified by the player.
-        if (!forceUpdate)
-            return;
-
-
         GravityAngle = GravityAngle % 360;
 
         // Defining the vector for gravity depending on the angle

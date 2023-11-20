@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
 
     private bool _isGrounded;
     private bool _doubleJump = true;
+    [SerializeField]
+    private float _groundCheckSize = 0.5f;
     public Transform GroundCheck;
     public LayerMask GroundLayer;
     
@@ -44,7 +46,7 @@ public class PlayerController : MonoBehaviour
         if (context.performed)
         {
             //Check jump
-            _isGrounded = Physics2D.OverlapCircle(GroundCheck.position, 0.1f, GroundLayer);
+            _isGrounded = Physics2D.OverlapCircle(GroundCheck.position, _groundCheckSize, GroundLayer);
 
             if(_isGrounded)
                 Jump();
@@ -105,5 +107,10 @@ public class PlayerController : MonoBehaviour
         {
             Application.Quit();
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(GroundCheck.position, _groundCheckSize);
     }
 }

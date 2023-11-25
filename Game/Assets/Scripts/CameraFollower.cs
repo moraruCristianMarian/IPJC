@@ -6,19 +6,7 @@ public class CameraFollower : MonoBehaviour
 {
     public Transform player;
     public float smoothRate = 3f;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     private void LateUpdate()
     {
         Vector3 playerPosition = player.position;

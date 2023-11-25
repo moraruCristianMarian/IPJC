@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _gravityScript = GameObject.Find("Manager").GetComponent<Gravity>();
+        _gravityScript = GetComponent<Gravity>();
         _rb = GetComponent<Rigidbody2D>();
     }
 
@@ -69,8 +69,26 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         transform.rotation = Quaternion.Euler(0, 0, _gravityScript.GravityAngle - 270);
+        
+        //Check restart game
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            transform.position = new Vector3(0, 0, 0);   
+            GetComponent<TimeTravel>().enabled = true;
+        }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
 
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            _gravityScript.ToggleGlobalGravity();
+        }
+    }
+    private void FixedUpdate()
+    {
         //Get Direction 
         Vector3 horizontalMovementVector = new Vector3(_input[0], _input[1], 0);
 
@@ -89,24 +107,13 @@ public class PlayerController : MonoBehaviour
 
         // Gravity angle adjust
         _gravityScript.AdjustGravityAngle(_inputGravityAdjust);
+        // Apply modified gravity specifically to the player (in case Global Gravity Change is off)
+        _rb.AddForce(_gravityScript.PlayerGravity * _rb.mass);
 
 
 
         if(_isGrounded)
             _doubleJump = true;
-
-
-        //Check restart game
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            transform.position = new Vector3(0, 0, 0);   
-            GetComponent<TimeTravel>().enabled = true;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
     }
 
     private void OnDrawGizmos()

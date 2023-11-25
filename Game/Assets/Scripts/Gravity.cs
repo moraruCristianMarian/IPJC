@@ -9,6 +9,7 @@ public class Gravity : MonoBehaviour
 
     public float GravityAngle;      // (in degrees)
     public Vector2 GravityVector;
+    public Vector2 PlayerGravity;
 
     public float GravityStrength = 9.81f;
 
@@ -17,6 +18,7 @@ public class Gravity : MonoBehaviour
     [SerializeField]
     private float _gravityRotationSpeed = 30.0f; 
 
+    public bool GlobalGravityChange = false;
 
 
     void Start()
@@ -45,10 +47,23 @@ public class Gravity : MonoBehaviour
         GravityVector.x = Mathf.Cos(gravityAngleRad);
         GravityVector.y = Mathf.Sin(gravityAngleRad);
 
-        Physics2D.gravity = GravityVector.normalized * GravityStrength;
+
+        if (GlobalGravityChange)
+            Physics2D.gravity = GravityVector.normalized * GravityStrength;
+        else
+            PlayerGravity = GravityVector.normalized * GravityStrength;
 
 
         // Rotate the UI arrow to show the direction of gravity
         DirectionObj.transform.rotation = Quaternion.Euler(0, 0, GravityAngle - 270);
+    }
+
+
+    public void ToggleGlobalGravity()
+    {
+        GlobalGravityChange = !GlobalGravityChange;
+
+        PlayerGravity = Vector2.zero;
+        gameObject.GetComponent<Rigidbody2D>().gravityScale = GlobalGravityChange ? 1.0f : 0.0f;
     }
 }

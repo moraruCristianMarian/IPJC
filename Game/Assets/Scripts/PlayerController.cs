@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     private bool _isGrounded;
     private bool _doubleJump = true;
     [SerializeField]
-    private float _groundCheckSize = 0.5f;
+    private float _groundCheckSize = 0.35f;
     public Transform GroundCheck;
     public LayerMask GroundLayer;
     

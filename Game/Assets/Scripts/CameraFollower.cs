@@ -14,6 +14,8 @@ public class CameraFollower : MonoBehaviour
 
         // Camera only follows the player on X axis
         cameraPosition.x = Mathf.Lerp(cameraPosition.x, playerPosition.x, smoothRate * Time.deltaTime);
+        //  ... unless?
+        cameraPosition.y = Mathf.Lerp(cameraPosition.y, playerPosition.y, smoothRate * Time.deltaTime);
 
         transform.position = cameraPosition;
 

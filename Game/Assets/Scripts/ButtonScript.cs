@@ -9,6 +9,11 @@ public class ButtonScript : MonoBehaviour
     //  Used to animate the button when pressed and unpressed
     private Animator _animator;
 
+
+    //  Stops the button from calling the linked object's function if it was already held down
+    private int _numberOfObjectsOnButton = 0;
+
+
     void Start()
     {
         _animator = GetComponent<Animator>();
@@ -16,25 +21,43 @@ public class ButtonScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.gameObject.HasCustomTag("ButtonInteract"))
         {
-            //  Call the method named "ButtonActivate" from the linked object
-            LinkedObject.SendMessage("ButtonActivate");
+            //  Only activate for the first object to press the button
+            if (_numberOfObjectsOnButton <= 0)
+            {
+                //  Call the method named "ButtonActivate" from the linked object
+                if (LinkedObject != null)
+                    LinkedObject.SendMessage("ButtonActivate");
 
-            //  Press animation
-            _animator.SetTrigger("ButtonPress");
+                //  Press animation
+                _animator.SetTrigger("ButtonPress");
+            }
+
+            _numberOfObjectsOnButton += 1;
+
+            Debug.Log(_numberOfObjectsOnButton);
         }
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.gameObject.HasCustomTag("ButtonInteract"))
         {
-            //  Call the method named "ButtonDeactivate" from the linked object
-            LinkedObject.SendMessage("ButtonDeactivate");
+            _numberOfObjectsOnButton -= 1;
 
-            //  Unpress animation
-            _animator.SetTrigger("ButtonUnpress");
+            //  Only deactivate when the last object on the button leaves
+            if (_numberOfObjectsOnButton <= 0)
+            {
+                //  Call the method named "ButtonDeactivate" from the linked object
+                if (LinkedObject != null)
+                    LinkedObject.SendMessage("ButtonDeactivate");
+
+                //  Unpress animation
+                _animator.SetTrigger("ButtonUnpress");
+            }
+
+            Debug.Log(_numberOfObjectsOnButton);
         }
     }
 }

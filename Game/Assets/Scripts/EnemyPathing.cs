@@ -24,6 +24,9 @@ public class EnemyPathing : MonoBehaviour
 
     void Update()
     {
+        //  Update rotation to be aligned with gravity
+        transform.rotation = Quaternion.FromToRotation(Vector3.down, Physics2D.gravity.normalized);
+
         //  Move horizontally in a direction depending on the current path point
         if (_currentPoint == _pathPoints[1].transform)
            transform.Translate(new Vector2(_speed * Time.deltaTime, 0));
@@ -31,7 +34,8 @@ public class EnemyPathing : MonoBehaviour
            transform.Translate(new Vector2(-_speed * Time.deltaTime, 0));
 
         //  Reverse direction and path point when the current one is reached
-        if (Vector2.Distance(transform.position, _currentPoint.position) < 0.5f)
+        if (((transform.position.x < _currentPoint.position.x) && (_currentPointIndex == 0))     ||
+            ((transform.position.x > _currentPoint.position.x) && (_currentPointIndex == 1)))
         {
             _currentPointIndex = 1 - _currentPointIndex;
             _currentPoint = _pathPoints[_currentPointIndex].transform;

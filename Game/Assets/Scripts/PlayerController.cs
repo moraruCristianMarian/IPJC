@@ -23,11 +23,17 @@ public class PlayerController : MonoBehaviour
     private Vector2 _input;
     private float _inputGravityAdjust;
 
+
+    //  Object inspect
+    private Camera _mainCamera;
+
+
     // Start is called before the first frame update
     void Start()
     {
         _gravityScript = GetComponent<Gravity>();
         _rb = GetComponent<Rigidbody2D>();
+        _mainCamera = Camera.main;
     }
 
 
@@ -63,6 +69,24 @@ public class PlayerController : MonoBehaviour
         _rb.velocity = -_gravityScript.GravityVector.normalized * JumpForce * (isDoubleJump? (2.0f/3.0f) : 1);
     }
 
+    public void ClickInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            var rayhit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
+            if (rayhit.collider)
+            {
+                Debug.Log(rayhit.collider.gameObject.name);
+                if (rayhit.collider.gameObject.HasCustomTag("Button"))
+                {
+                    _mainCamera.GetComponent<CameraFollower>().Player = rayhit.collider.gameObject.GetComponent<ButtonScript>().LinkedObject.transform;
+                    return;
+                }
+            }
+            
+            _mainCamera.GetComponent<CameraFollower>().Player = transform;
+        }
+    }
 
     
     // Update is called once per frame
@@ -74,7 +98,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             transform.position = new Vector3(0, 0, 0);   
-            GetComponent<TimeTravel>().enabled = true;
+            // GetComponent<TimeTravel>().enabled = true;
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))

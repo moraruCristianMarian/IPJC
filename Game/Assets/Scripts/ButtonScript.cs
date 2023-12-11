@@ -35,8 +35,6 @@ public class ButtonScript : MonoBehaviour
             }
 
             _numberOfObjectsOnButton += 1;
-
-            Debug.Log(_numberOfObjectsOnButton);
         }
     }
 
@@ -56,8 +54,6 @@ public class ButtonScript : MonoBehaviour
                 //  Unpress animation
                 _animator.SetTrigger("ButtonUnpress");
             }
-
-            Debug.Log(_numberOfObjectsOnButton);
         }
     }
 }

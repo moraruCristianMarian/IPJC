@@ -22,7 +22,7 @@ public class TimeTravel : MonoBehaviour
     void Awake()
     {
         _myRigidbody = GetComponent<Rigidbody2D>();
-        _gravityScript = GameObject.Find("Manager").GetComponent<Gravity>();
+        _gravityScript = GetComponent<Gravity>();
     }
 
     // When the script is first started or is re-enabled, create a past clone and set its transforms to the player's.

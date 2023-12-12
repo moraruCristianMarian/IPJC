@@ -16,18 +16,24 @@ public class PlayerController : MonoBehaviour
     private bool _isGrounded;
     private bool _doubleJump = true;
     [SerializeField]
-    private float _groundCheckSize = 0.5f;
+    private float _groundCheckSize = 0.35f;
     public Transform GroundCheck;
     public LayerMask GroundLayer;
     
     private Vector2 _input;
     private float _inputGravityAdjust;
 
+
+    //  Object inspect
+    private Camera _mainCamera;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        _gravityScript = GameObject.Find("Manager").GetComponent<Gravity>();
+        _gravityScript = GetComponent<Gravity>();
         _rb = GetComponent<Rigidbody2D>();
+        _mainCamera = Camera.main;
     }
 
 
@@ -63,14 +69,50 @@ public class PlayerController : MonoBehaviour
         _rb.velocity = -_gravityScript.GravityVector.normalized * JumpForce * (isDoubleJump? (2.0f/3.0f) : 1);
     }
 
+    public void ClickInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            var rayhit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
+            if (rayhit.collider)
+            {
+                Debug.Log(rayhit.collider.gameObject.name);
+                if (rayhit.collider.gameObject.HasCustomTag("Button"))
+                {
+                    _mainCamera.GetComponent<CameraFollower>().Player = rayhit.collider.gameObject.GetComponent<ButtonScript>().LinkedObject.transform;
+                    return;
+                }
+            }
+            
+            _mainCamera.GetComponent<CameraFollower>().Player = transform;
+        }
+    }
 
     
     // Update is called once per frame
     void Update()
     {
         transform.rotation = Quaternion.Euler(0, 0, _gravityScript.GravityAngle - 270);
+        
+        //Check restart game
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            transform.position = new Vector3(0, 0, 0);   
+            // GetComponent<TimeTravel>().enabled = true;
+        }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
 
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            _gravityScript.ToggleGlobalGravity();
+        }
+    }
+    private void FixedUpdate()
+    {
         //Get Direction 
         Vector3 horizontalMovementVector = new Vector3(_input[0], _input[1], 0);
 
@@ -89,24 +131,13 @@ public class PlayerController : MonoBehaviour
 
         // Gravity angle adjust
         _gravityScript.AdjustGravityAngle(_inputGravityAdjust);
+        // Apply modified gravity specifically to the player (in case Global Gravity Change is off)
+        _rb.AddForce(_gravityScript.PlayerGravity * _rb.mass);
 
 
 
         if(_isGrounded)
             _doubleJump = true;
-
-
-        //Check restart game
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            transform.position = new Vector3(0, 0, 0);   
-            GetComponent<TimeTravel>().enabled = true;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
     }
 
     private void OnDrawGizmos()

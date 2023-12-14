@@ -11,11 +11,20 @@ public class EnemyPathing : MonoBehaviour
     private int _currentPointIndex = 0;
 
     [SerializeField]
-    private float _speed = 3.0f;
+    private float _baseSpeed = 3.0f;
+    private float _speed;
+
+    private float _spriteRotation;
+    private float _spriteRotationPrev;
 
 
     void Start()
     {
+        _speed = _baseSpeed;
+        
+        _spriteRotationPrev = _spriteRotation;
+        GetComponent<SpriteRenderer>().flipX = true;
+
         _rb = GetComponent<Rigidbody2D>();
 
         _currentPoint = _pathPoints[1].transform;
@@ -28,18 +37,23 @@ public class EnemyPathing : MonoBehaviour
         transform.rotation = Quaternion.FromToRotation(Vector3.down, Physics2D.gravity.normalized);
 
         //  Move horizontally in a direction depending on the current path point
-        if (_currentPoint == _pathPoints[1].transform)
-           transform.Translate(new Vector2(_speed * Time.deltaTime, 0));
-        else
-           transform.Translate(new Vector2(-_speed * Time.deltaTime, 0));
+        _speed = _baseSpeed * Mathf.Sign(transform.right.x);
+        transform.Translate(new Vector2(_speed * Time.deltaTime, 0));
+
+        _spriteRotation = Mathf.Sign(_speed * _pathPoints[0].transform.position.x);
+        if (_spriteRotation != _spriteRotationPrev)
+            GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX ;
+        _spriteRotationPrev = _spriteRotation;
 
         //  Reverse direction and path point when the current one is reached
         if (((transform.position.x < _currentPoint.position.x) && (_currentPointIndex == 0))     ||
             ((transform.position.x > _currentPoint.position.x) && (_currentPointIndex == 1)))
         {
+            _baseSpeed *= -1;
+
             _currentPointIndex = 1 - _currentPointIndex;
             _currentPoint = _pathPoints[_currentPointIndex].transform;
-            GetComponent<SpriteRenderer>().flipX = (_currentPointIndex == 0);
+            //GetComponent<SpriteRenderer>().flipX = (_currentPointIndex == 0);
         }
     }
     

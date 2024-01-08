@@ -26,20 +26,36 @@ public class PlayerLife : MonoBehaviour
         healthBar.SetHealth(currentHealth);
     }
 
-    private void Die() {
+    private void Heal(int healthRestored)
+    {
+        currentHealth += healthRestored;
+        healthBar.SetHealth(currentHealth);
+    }
+
+    private void Die()
+    {
         _rb.bodyType = RigidbodyType2D.Static;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.gameObject.CompareTag("Enemy"));
         if (collision.gameObject.CompareTag("Enemy"))
         {
             TakeDamage(1);
-            if(currentHealth == 0) {
+            if (currentHealth == 0)
+            {
                 Die();
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("PowerUp"))
+        {
+            Destroy(collision.gameObject);
+            Heal(maxHealth - currentHealth);
         }
     }
 }

@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
     //  Object inspect
     private Camera _mainCamera;
 
+    [SerializeField] private AudioSource jumpSoundEffect;
+
 
     // Start is called before the first frame update
     void Start()
@@ -66,6 +68,7 @@ public class PlayerController : MonoBehaviour
     }
     void Jump(bool isDoubleJump = false)
     {
+        jumpSoundEffect.Play();
         //The second jump is not as high
         _rb.velocity = -_gravityScript.GravityVector.normalized * JumpForce * (isDoubleJump ? (2.0f / 3.0f) : 1);
     }

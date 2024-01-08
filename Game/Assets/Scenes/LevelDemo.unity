@@ -664,6 +664,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6728952605400812340, guid: 882e2799a1e52824fb43cd0000e7f35e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6728952605400812340, guid: 882e2799a1e52824fb43cd0000e7f35e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 6871112624232858402, guid: 882e2799a1e52824fb43cd0000e7f35e, type: 3}
+      propertyPath: m_Size.x
+      value: 1.6822741
+      objectReference: {fileID: 0}
+    - target: {fileID: 6871112624232858402, guid: 882e2799a1e52824fb43cd0000e7f35e, type: 3}
+      propertyPath: m_Size.y
+      value: 3.764038
+      objectReference: {fileID: 0}
+    - target: {fileID: 6871112624232858402, guid: 882e2799a1e52824fb43cd0000e7f35e, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.016047388
+      objectReference: {fileID: 0}
+    - target: {fileID: 6871112624232858402, guid: 882e2799a1e52824fb43cd0000e7f35e, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.014516592
+      objectReference: {fileID: 0}
     - target: {fileID: 6972819654540895256, guid: 882e2799a1e52824fb43cd0000e7f35e, type: 3}
       propertyPath: powerUpText
       value: 

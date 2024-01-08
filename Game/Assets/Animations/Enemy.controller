@@ -7,7 +7,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Soldier_Walk
+  m_Name: Alien_Running
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -20,7 +20,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 6b9adc6d4fdb5ac459246e568cd40734, type: 2}
+  m_Motion: {fileID: 7400000, guid: bea2f06bf3b9035499c8214dcb072db6, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

@@ -13,6 +13,11 @@ public class PlayerLife : MonoBehaviour
     public HealthBar healthBar;
 
     // Start is called before the first frame update
+    [SerializeField] private AudioSource collectSoundEffect;
+    [SerializeField] private AudioSource collisionSoundEffect;
+    [SerializeField] private AudioSource deathSoundEffect;
+
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -22,6 +27,7 @@ public class PlayerLife : MonoBehaviour
 
     private void TakeDamage(int damage)
     {
+        collisionSoundEffect.Play();
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
     }
@@ -34,6 +40,7 @@ public class PlayerLife : MonoBehaviour
 
     private void Die()
     {
+        deathSoundEffect.Play();
         _rb.bodyType = RigidbodyType2D.Static;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -55,6 +62,7 @@ public class PlayerLife : MonoBehaviour
         if (collision.gameObject.CompareTag("PowerUp"))
         {
             Destroy(collision.gameObject);
+            collectSoundEffect.Play();
             Heal(maxHealth - currentHealth);
         }
     }

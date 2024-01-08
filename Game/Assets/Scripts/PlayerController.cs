@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,10 +20,9 @@ public class PlayerController : MonoBehaviour
     private float _groundCheckSize = 0.35f;
     public Transform GroundCheck;
     public LayerMask GroundLayer;
-    
+
     private Vector2 _input;
     private float _inputGravityAdjust;
-
 
     //  Object inspect
     private Camera _mainCamera;
@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
     {
         _inputGravityAdjust = -(context.ReadValue<Vector2>())[0];
     }
-        
+
     public void JumpInput(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -54,19 +54,20 @@ public class PlayerController : MonoBehaviour
             //Check jump
             _isGrounded = Physics2D.OverlapCircle(GroundCheck.position, _groundCheckSize, GroundLayer);
 
-            if(_isGrounded)
+            if (_isGrounded)
                 Jump();
             else
                 if (_doubleJump)
-                {
-                    Jump(_doubleJump);
-                    _doubleJump = false;
-                }
+            {
+                Jump(_doubleJump);
+                _doubleJump = false;
+            }
         }
     }
-    void Jump(bool isDoubleJump = false) {
+    void Jump(bool isDoubleJump = false)
+    {
         //The second jump is not as high
-        _rb.velocity = -_gravityScript.GravityVector.normalized * JumpForce * (isDoubleJump? (2.0f/3.0f) : 1);
+        _rb.velocity = -_gravityScript.GravityVector.normalized * JumpForce * (isDoubleJump ? (2.0f / 3.0f) : 1);
     }
 
     public void ClickInput(InputAction.CallbackContext context)
@@ -83,22 +84,21 @@ public class PlayerController : MonoBehaviour
                     return;
                 }
             }
-            
+
             _mainCamera.GetComponent<CameraFollower>().Player = transform;
         }
     }
 
-    
+
     // Update is called once per frame
     void Update()
     {
         transform.rotation = Quaternion.Euler(0, 0, _gravityScript.GravityAngle - 270);
-        
+
         //Check restart game
         if (Input.GetKeyDown(KeyCode.R))
         {
-            transform.position = new Vector3(0, 0, 0);   
-            // GetComponent<TimeTravel>().enabled = true;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
         Vector3 horizontalMovementVector = new Vector3(_input[0], _input[1], 0);
 
         //Check Direction of Sprite
-        if(horizontalMovementVector[0] != 0)
+        if (horizontalMovementVector[0] != 0)
         {
             GetComponent<SpriteRenderer>().flipX = horizontalMovementVector[0] < 0;
         }
@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour
 
         //Move object
         //_rb.velocity = new Vector2(horizontalMovementVector[0], _rb.velocity.y);
-        transform.Translate(horizontalMovementVector); 
+        transform.Translate(horizontalMovementVector);
         //_rb.velocity = horizontalMovementVector;
 
 
@@ -136,7 +136,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-        if(_isGrounded)
+        if (_isGrounded)
             _doubleJump = true;
     }
 
@@ -144,4 +144,5 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.DrawWireSphere(GroundCheck.position, _groundCheckSize);
     }
+
 }

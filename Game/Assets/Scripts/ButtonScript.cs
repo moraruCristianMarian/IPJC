@@ -59,6 +59,11 @@ public class ButtonScript : MonoBehaviour
         }
     }
 
+    void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+    
     IEnumerator Deactivate(float delay)
     {
         yield return new WaitForSeconds(delay);

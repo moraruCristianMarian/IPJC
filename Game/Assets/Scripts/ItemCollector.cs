@@ -15,5 +15,15 @@ public class ItemCollector : MonoBehaviour
             Destroy(collision.gameObject);
             powerUpText.text = "PowerUp Activated!";
         }
+
+        if (collision.gameObject.HasCustomTag("GravityRotationPotion"))
+        {
+            Gravity gravityScript = FindObjectOfType<Gravity>();
+            if (gravityScript != null)
+            {
+                gravityScript.CanRotateGravity = true;
+            }
+            winSoundEffect.Play();
+        }
     }
 }

@@ -277,37 +277,19 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 121640115}
-  m_Text: 'INSTRUCTIONS
+  m_Text: 'Healing
 
-    > A/D = Move left/right
-
-    > W = Jump
-
-    > R = Reset
-    position (Debug)
-
-    > Left / right arrows = Change gravity direction
-
-    >
-    G = Change who is affected by gravity (only the player / all physics objects)
-
-    >
-    Right click = Inspect what object is linked to a button
-
-
-    Try to get there
-
-    <---------'
+    Potion'
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
   m_Anchor: 0
-  m_Alignment: 0
+  m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 0
+  m_FontSize: 15
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: 4f3d00491020527488596009f108639a, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
@@ -331,7 +313,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 4f3d00491020527488596009f108639a, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -362,7 +344,7 @@ Transform:
   m_GameObject: {fileID: 121640115}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.5, y: 1.8, z: 0}
+  m_LocalPosition: {x: -0.24, y: 4.03, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5322,6 +5304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   winSoundEffect: {fileID: 1770882475}
+  collectSoundEffect: {fileID: 0}
 --- !u!82 &1770882475
 AudioSource:
   m_ObjectHideFlags: 0

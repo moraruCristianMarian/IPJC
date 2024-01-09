@@ -12,5 +12,15 @@ public class ItemCollector : MonoBehaviour
         {
             winSoundEffect.Play();
         }
+
+        if (collision.gameObject.HasCustomTag("GravityRotationPotion"))
+        {
+            Gravity gravityScript = FindObjectOfType<Gravity>();
+            if (gravityScript != null)
+            {
+                gravityScript.CanRotateGravity = true;
+            }
+            winSoundEffect.Play();
+        }
     }
 }

@@ -20,6 +20,9 @@ public class Gravity : MonoBehaviour
 
     public bool GlobalGravityChange = false;
 
+    public bool CanRotateGravity = true;
+    public bool CanToggleGlobalGravity = true;
+
 
     void Start()
     {

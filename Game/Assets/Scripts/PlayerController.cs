@@ -111,7 +111,8 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.G))
         {
-            _gravityScript.ToggleGlobalGravity();
+            if ((_gravityScript.CanToggleGlobalGravity) && (_gravityScript.CanRotateGravity))
+                _gravityScript.ToggleGlobalGravity();
         }
     }
     private void FixedUpdate()
@@ -133,7 +134,8 @@ public class PlayerController : MonoBehaviour
 
 
         // Gravity angle adjust
-        _gravityScript.AdjustGravityAngle(_inputGravityAdjust);
+        if (_gravityScript.CanRotateGravity)
+            _gravityScript.AdjustGravityAngle(_inputGravityAdjust);
         // Apply modified gravity specifically to the player (in case Global Gravity Change is off)
         _rb.AddForce(_gravityScript.PlayerGravity * _rb.mass);
 

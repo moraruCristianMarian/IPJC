@@ -54,6 +54,12 @@ public class PlayerLife : MonoBehaviour
             {
                 Die();
             }
+            
+            //  Destroy objects like enemy projectiles on collision
+            if (collision.gameObject.HasCustomTag("DestroyOnPlayerContact"))
+            {
+                Destroy(collision.gameObject);
+            }
         }
     }
 
@@ -64,6 +70,22 @@ public class PlayerLife : MonoBehaviour
             Destroy(collision.gameObject);
             collectSoundEffect.Play();
             Heal(maxHealth - currentHealth);
+        }
+        //  Projectiles shouldn't have blocking collision, so I copied this code to OnTriggerEnter2D as well
+        else
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            //  Destroy objects like enemy projectiles on collision
+            if (collision.gameObject.HasCustomTag("DestroyOnPlayerContact"))
+            {
+                Destroy(collision.gameObject);
+            }
+
+            TakeDamage(1);
+            if (currentHealth == 0)
+            {
+                Die();
+            }
         }
     }
 }

@@ -13,6 +13,10 @@ public class ButtonScript : MonoBehaviour
     //  Stops the button from calling the linked object's function if it was already held down
     private int _numberOfObjectsOnButton = 0;
 
+    //  Amount of time after stepping off the button before it deactivates the linked object
+    [SerializeField]
+    private float _deactivateDelay = 0.5f;
+
 
     void Start()
     {
@@ -26,6 +30,9 @@ public class ButtonScript : MonoBehaviour
             //  Only activate for the first object to press the button
             if (_numberOfObjectsOnButton <= 0)
             {
+                //  Stop the deactivation coroutine if it was previously queued
+                StopAllCoroutines();
+
                 //  Call the method named "ButtonActivate" from the linked object
                 if (LinkedObject != null)
                     LinkedObject.SendMessage("ButtonActivate");
@@ -47,13 +54,20 @@ public class ButtonScript : MonoBehaviour
             //  Only deactivate when the last object on the button leaves
             if (_numberOfObjectsOnButton <= 0)
             {
-                //  Call the method named "ButtonDeactivate" from the linked object
-                if (LinkedObject != null)
-                    LinkedObject.SendMessage("ButtonDeactivate");
-
-                //  Unpress animation
-                _animator.SetTrigger("ButtonUnpress");
+                StartCoroutine(Deactivate(_deactivateDelay));
             }
         }
+    }
+
+    IEnumerator Deactivate(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        //  Call the method named "ButtonDeactivate" from the linked object
+        if (LinkedObject != null)
+            LinkedObject.SendMessage("ButtonDeactivate");
+
+        //  Unpress animation
+        _animator.SetTrigger("ButtonUnpress");
     }
 }

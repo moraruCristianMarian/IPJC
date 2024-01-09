@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6621346259323133122}
   - component: {fileID: 1576641487504712580}
   - component: {fileID: 2198802047545216721}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,3 +173,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _customTags:
   - {fileID: 11400000, guid: a17ffe7f4e1f33e4881520f0266d9983, type: 2}
+  - {fileID: 11400000, guid: cacd94bf199f7444aa642b5885d0e20a, type: 2}

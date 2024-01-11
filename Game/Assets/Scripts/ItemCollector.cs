@@ -26,6 +26,16 @@ public class ItemCollector : MonoBehaviour
             }
             collectSoundEffect.Play();
         }
+        else
+        if (collision.gameObject.HasCustomTag("TimeTravelPotion"))
+        {
+            TimeTravel timeTravelScript = FindObjectOfType<TimeTravel>();
+            if (timeTravelScript != null)
+            {
+                timeTravelScript.enabled = true;
+            }
+            collectSoundEffect.Play();
+        }
     }
 
     private void CompleteLevel() {

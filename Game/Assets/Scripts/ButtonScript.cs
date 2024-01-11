@@ -54,7 +54,8 @@ public class ButtonScript : MonoBehaviour
             //  Only deactivate when the last object on the button leaves
             if (_numberOfObjectsOnButton <= 0)
             {
-                StartCoroutine(Deactivate(_deactivateDelay));
+                if (gameObject.activeSelf)
+                    StartCoroutine(Deactivate(_deactivateDelay));
             }
         }
     }

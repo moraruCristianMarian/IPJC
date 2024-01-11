@@ -52,6 +52,7 @@ GameObject:
   - component: {fileID: 4831859764057726439}
   - component: {fileID: -3963882659368488004}
   - component: {fileID: 2424034502566449969}
+  - component: {fileID: 2066829922357133891}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -313,6 +314,7 @@ MonoBehaviour:
   GroundLayer:
     serializedVersion: 2
     m_Bits: 64
+  jumpSoundEffect: {fileID: 0}
 --- !u!114 &6972819654540895256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,7 +327,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 292af30564d675a4084c64306b0064f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerUpText: {fileID: 0}
+  winSoundEffect: {fileID: 0}
+  collectSoundEffect: {fileID: 0}
 --- !u!114 &8604360007212781020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,6 +481,8 @@ MonoBehaviour:
   GravityStrength: 9.81
   _gravityRotationSpeed: 40
   GlobalGravityChange: 0
+  CanRotateGravity: 1
+  CanToggleGlobalGravity: 1
 --- !u!114 &-3963882659368488004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,3 +511,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _customTags:
   - {fileID: 11400000, guid: a17ffe7f4e1f33e4881520f0266d9983, type: 2}
+--- !u!114 &2066829922357133891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6518984848475983354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7928e5c62c6c394b8f299d25df494f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

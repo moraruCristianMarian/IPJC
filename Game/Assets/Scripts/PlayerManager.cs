@@ -38,6 +38,11 @@ public class PlayerManager : MonoBehaviour
         DisplayGreetings(inputName);
     }
 
+    public void SwitchPlayer()
+    {
+        logInMenu.SetActive(true);
+    }
+
     public void SaveToJson(PlayersData playersData)
     {
         string jsonString = JsonUtility.ToJson(playersData, true);

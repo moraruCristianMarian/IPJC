@@ -1,5 +1,7 @@
 {
-    "Players": [
-        "Player"
-    ]
+    "players": [
+        "Player",
+        "User"
+    ],
+    "currentPlayer": "Player"
 }

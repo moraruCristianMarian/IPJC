@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class PlayersData
 {
-    public List<string> Players = new List<string>();
+    public List<string> players = new List<string>();
+    public string currentPlayer;
 }

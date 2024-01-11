@@ -10,6 +10,7 @@ public class PlayerManager : MonoBehaviour
 {
     public TMP_InputField playerNameField;
     public GameObject logInMenu;
+    public Button cancelSwitchPlayerButton;
     private string filePath = Application.dataPath + "/Data/PlayersDataFile.json";
 
     public TMP_Text greetingsText;
@@ -19,28 +20,52 @@ public class PlayerManager : MonoBehaviour
         PlayersData playersData = LoadFromJson();
         bool logInMenuIsActive = playersData.currentPlayer == null;
         logInMenu.SetActive(logInMenuIsActive);
-        if(!logInMenuIsActive) {
+        if (logInMenuIsActive)
+        {
+            cancelSwitchPlayerButton.interactable = false;
+        }
+        else
+        {
             DisplayGreetings(playersData.currentPlayer);
         }
     }
+
+
 
     public void LogInPlayer()
     {
         PlayersData playersData = LoadFromJson();
         string inputName = playerNameField.text.ToString();
-        if (!playersData.players.Any(inputName.Contains))
+        if (string.IsNullOrEmpty(inputName))
+        {
+            playerNameField.GetComponent<Image>().color = new Color(1f, 0.5f, 0.5f);
+            return;
+        }
+        if (!playersData.players.Any(inputName.Equals))
         {
             playersData.players.Add(inputName);
         }
         playersData.currentPlayer = inputName;
         SaveToJson(playersData);
         logInMenu.SetActive(false);
+        cancelSwitchPlayerButton.interactable = true;
+        playerNameField.GetComponent<Image>().color = Color.white;
         DisplayGreetings(inputName);
+    }
+
+    private bool CheckNameIsValid(string inputName)
+    {
+        return !string.IsNullOrEmpty(inputName);
     }
 
     public void SwitchPlayer()
     {
         logInMenu.SetActive(true);
+    }
+
+    public void CancelSwitchPlayer()
+    {
+        logInMenu.SetActive(false);
     }
 
     public void SaveToJson(PlayersData playersData)

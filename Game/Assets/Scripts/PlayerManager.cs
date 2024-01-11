@@ -9,7 +9,20 @@ using TMPro;
 public class PlayerManager : MonoBehaviour
 {
     public TMP_InputField playerNameField;
+    public GameObject logInMenu;
     private string filePath = Application.dataPath + "/Data/PlayersDataFile.json";
+
+    public TMP_Text greetingsText;
+
+    void Start()
+    {
+        PlayersData playersData = LoadFromJson();
+        bool logInMenuIsActive = playersData.currentPlayer == null;
+        logInMenu.SetActive(logInMenuIsActive);
+        if(!logInMenuIsActive) {
+            DisplayGreetings(playersData.currentPlayer);
+        }
+    }
 
     public void LogInPlayer()
     {
@@ -21,6 +34,8 @@ public class PlayerManager : MonoBehaviour
         }
         playersData.currentPlayer = inputName;
         SaveToJson(playersData);
+        logInMenu.SetActive(false);
+        DisplayGreetings(inputName);
     }
 
     public void SaveToJson(PlayersData playersData)
@@ -41,5 +56,10 @@ public class PlayerManager : MonoBehaviour
         {
             return new PlayersData();
         }
+    }
+
+    void DisplayGreetings(string nameToDisplay)
+    {
+        greetingsText.text = "Welcome back, " + nameToDisplay + "!";
     }
 }

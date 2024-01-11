@@ -844,7 +844,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2017998861}
         m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: SaveToJson
+        m_MethodName: LogInPlayer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

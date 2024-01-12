@@ -70,3 +70,6 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /Game/[Aa]ssets/[Ss]treamingAssets/aa.meta
 /Game/[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Ignore JSON files in the "data" folder within the "assets" folder
+/Game/[Aa]ssets/data/*.json

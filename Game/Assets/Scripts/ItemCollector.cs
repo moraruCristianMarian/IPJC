@@ -23,6 +23,10 @@ public class ItemCollector : MonoBehaviour
             if (gravityScript != null)
             {
                 gravityScript.CanRotateGravity = true;
+
+                
+                if (collision.gameObject.HasCustomTag("GlobalGravityRotationPotion"))
+                    gravityScript.CanToggleGlobalGravity = true;
             }
             collectSoundEffect.Play();
         }

@@ -617,6 +617,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa78e27b1b4c6d40bfb47faa8f2c571, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &435670309 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6465582168445652432, guid: 623640b68bb98724ca2ef8bf7b86e750, type: 3}
+  m_PrefabInstance: {fileID: 492788057}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5c5aca91dac87f49a19400d6218664d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &443625567 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6751777009637158529, guid: e71f550c1ee5946458cd3fa232f9d684, type: 3}
@@ -876,6 +887,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6751777009637158529, guid: e71f550c1ee5946458cd3fa232f9d684, type: 3}
   m_PrefabInstance: {fileID: 529500554}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &553379958 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6297376580151581564, guid: d9401959162eec14ba059dfa5bd544fc, type: 3}
+  m_PrefabInstance: {fileID: 4926217050590787550}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc7a23ae136fa3d4b9287eeac6584d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &575039110 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1252206062025007048, guid: 2b70e648e756ad5419bec7a2cf42f904, type: 3}
@@ -21285,8 +21307,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   winSoundEffect: {fileID: 1770882475}
   collectSoundEffect: {fileID: 1770882479}
-  progressManager: {fileID: 0}
-  timer: {fileID: 0}
+  progressManager: {fileID: 435670309}
+  timer: {fileID: 553379958}
 --- !u!82 &1770882475
 AudioSource:
   m_ObjectHideFlags: 0

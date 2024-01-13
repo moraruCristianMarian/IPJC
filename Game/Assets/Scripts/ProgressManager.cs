@@ -25,13 +25,14 @@ public class ProgressManager : MonoBehaviour
     public void SaveToJson(string levelName, string levelTime)
     {
         PlayerProgressData playerProgressData = LoadFromJson();
-        playerProgressData.lastCompletedLevel = levelName;
+        playerProgressData.lastCompletedLevel =
+            String.Compare(levelName, "Level3") == 0 ? "Tutorial0" : levelName;
         LevelData levelData = playerProgressData
             .bestTimesPerLevel.Where(item => item.name == levelName)
             .FirstOrDefault();
         if (levelData != null)
         {
-            if (String.Compare(levelData.bestTime, levelTime) < 0)
+            if (String.Compare(levelData.bestTime, levelTime) > 0)
                 playerProgressData.bestTimesPerLevel.ForEach(item =>
                 {
                     if (item.name == levelName)
@@ -46,7 +47,6 @@ public class ProgressManager : MonoBehaviour
                 new LevelData { name = levelName, bestTime = levelTime }
             );
         }
-        Debug.Log(levelTime);
         string jsonString = JsonUtility.ToJson(playerProgressData, true);
         File.WriteAllText(this.FilePath, jsonString);
     }

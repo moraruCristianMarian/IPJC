@@ -644,6 +644,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 623640b68bb98724ca2ef8bf7b86e750, type: 3}
+--- !u!114 &384346631 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6465582168445652432, guid: 623640b68bb98724ca2ef8bf7b86e750, type: 3}
+  m_PrefabInstance: {fileID: 384346630}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5c5aca91dac87f49a19400d6218664d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &419402256
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8210,8 +8221,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   winSoundEffect: {fileID: 1770882475}
   collectSoundEffect: {fileID: 1770882479}
-  progressManager: {fileID: 0}
-  timer: {fileID: 0}
+  progressManager: {fileID: 384346631}
+  timer: {fileID: 1367360852}
 --- !u!82 &1770882475
 AudioSource:
   m_ObjectHideFlags: 0

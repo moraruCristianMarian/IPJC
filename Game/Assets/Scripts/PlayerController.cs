@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     // Accessing the gravity script for its gravity angle and vector
     private Gravity _gravityScript;
     private Rigidbody2D _rb;
+    private ButtonInspectScript _inspectIcon;
 
     public float JumpForce = 9;
     public float Speed = 4;
@@ -36,6 +37,10 @@ public class PlayerController : MonoBehaviour
         _gravityScript = GetComponent<Gravity>();
         _rb = GetComponent<Rigidbody2D>();
         _mainCamera = Camera.main;
+        _inspectIcon = FindObjectOfType<ButtonInspectScript>();
+
+        if (!_inspectIcon)
+            Debug.Log("[MagnifyingGlassImage] prefab was not found in the Canvas for this scene");
     }
 
 
@@ -84,11 +89,30 @@ public class PlayerController : MonoBehaviour
                 if (rayhit.collider.gameObject.HasCustomTag("Button"))
                 {
                     _mainCamera.GetComponent<CameraFollower>().Player = rayhit.collider.gameObject.GetComponent<ButtonScript>().LinkedObject.transform;
+                    
+                    if (_inspectIcon)
+                        _inspectIcon.ChangeVisibility(1.0f);
+
+                    return;
+                }
+                else
+                if (rayhit.collider.gameObject.HasCustomTag("CameraViewer"))
+                {
+                    _mainCamera.GetComponent<CameraFollower>().Player = rayhit.collider.gameObject.GetComponent<SurveillanceCameraScript>().LinkedObject.transform;
+                    _mainCamera.orthographicSize = 7.0f;
+
+                    if (_inspectIcon)
+                        _inspectIcon.ChangeVisibility(0.0f);
+
                     return;
                 }
             }
 
+            if (_inspectIcon)
+                _inspectIcon.ChangeVisibility(0.0f);
+
             _mainCamera.GetComponent<CameraFollower>().Player = transform;
+            _mainCamera.orthographicSize = 5.0f;
         }
     }
 

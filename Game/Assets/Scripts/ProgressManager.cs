@@ -16,7 +16,6 @@ public class ProgressManager : MonoBehaviour
         get
         {
             return Application.dataPath
-                + "/Data/"
                 + playerManager.CurrentPlayer
                 + "ProgressData.json";
         }

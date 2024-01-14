@@ -546,7 +546,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '- Einstein''s Oddysey -'
+  m_text: '- Einstein''s Odyssey -'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0a982f42aa264324baf3e5aba0756c7c, type: 2}
   m_sharedMaterial: {fileID: 3456944642871888761, guid: 0a982f42aa264324baf3e5aba0756c7c, type: 2}

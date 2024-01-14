@@ -65,6 +65,15 @@ public class ProgressManager : MonoBehaviour
         }
     }
 
+    public string GetBestTime(string levelName)
+    {
+        PlayerProgressData playerProgressData = LoadFromJson();
+        LevelData levelData = playerProgressData
+            .bestTimesPerLevel.Where(item => item.name == levelName)
+            .FirstOrDefault();
+        return levelData != null? levelData.bestTime : null;
+    }
+
     public string GetLastCompletedLevel()
     {
         PlayerProgressData playerProgressData = LoadFromJson();

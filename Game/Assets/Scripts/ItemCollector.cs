@@ -9,6 +9,7 @@ public class ItemCollector : MonoBehaviour
     [SerializeField] private AudioSource collectSoundEffect;
     [SerializeField] private ProgressManager progressManager;
     [SerializeField] private Timer timer;
+    [SerializeField] private EndLevelManager endLevelManager;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -16,7 +17,7 @@ public class ItemCollector : MonoBehaviour
         {
             winSoundEffect.Play();
             // wait some seconds before next level
-            Invoke("CompleteLevel", 1f);
+            Invoke("CompleteLevel", 0.5f);
         }
 
         if (collision.gameObject.HasCustomTag("GravityRotationPotion"))
@@ -48,7 +49,8 @@ public class ItemCollector : MonoBehaviour
         Scene scene = SceneManager.GetActiveScene();
         string levelName = scene.name;
         string levelTime = timer.timeText.text;
+        string bestLevelTime = progressManager.GetBestTime(levelName);
         progressManager.SaveToJson(levelName, levelTime);
-        SceneManager.LoadScene(scene.buildIndex + 1);
+        endLevelManager.DisplayPanel(bestLevelTime, levelTime);
     }
 }

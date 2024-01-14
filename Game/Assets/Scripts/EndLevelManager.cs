@@ -19,7 +19,6 @@ public class EndLevelManager : MonoBehaviour
     public void DisplayPanel(string bestLevelTime, string levelTime)
     {
         Time.timeScale = 0f;
-        endLevelPanel.SetActive(true);
         if (bestLevelTime == null)
         {
             scoreText.text = string.Format(
@@ -40,6 +39,7 @@ public class EndLevelManager : MonoBehaviour
                 levelTime,
                 bestLevelTime
             );
+        endLevelPanel.SetActive(true);
     }
 
     public void GoToMainMenu()

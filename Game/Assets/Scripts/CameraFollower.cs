@@ -6,6 +6,7 @@ public class CameraFollower : MonoBehaviour
 {
     public Transform Player;
     public float SmoothRate = 3f;
+    public bool FollowRotation = true;
     
     private void LateUpdate()
     {
@@ -19,6 +20,7 @@ public class CameraFollower : MonoBehaviour
 
         transform.position = cameraPosition;
 
-        transform.rotation = Player.rotation;
+        if (FollowRotation)
+            transform.rotation = Player.rotation;
     }
 }

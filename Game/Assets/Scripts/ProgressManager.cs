@@ -26,7 +26,7 @@ public class ProgressManager : MonoBehaviour
     {
         PlayerProgressData playerProgressData = LoadFromJson();
         playerProgressData.lastCompletedLevel =
-            String.Compare(levelName, "Level3") == 0 ? "Tutorial0" : levelName;
+            String.Compare(levelName, "Level4") == 0 ? "Tutorial0" : levelName;
         LevelData levelData = playerProgressData
             .bestTimesPerLevel.Where(item => item.name == levelName)
             .FirstOrDefault();

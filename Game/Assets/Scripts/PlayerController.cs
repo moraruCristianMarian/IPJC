@@ -88,17 +88,22 @@ public class PlayerController : MonoBehaviour
                 Debug.Log(rayhit.collider.gameObject.name);
                 if (rayhit.collider.gameObject.HasCustomTag("Button"))
                 {
+                    _mainCamera.GetComponent<CameraFollower>().FollowRotation = false;
                     _mainCamera.GetComponent<CameraFollower>().Player = rayhit.collider.gameObject.GetComponent<ButtonScript>().LinkedObject.transform;
-                    
+
+                    _mainCamera.orthographicSize = 5.0f;
+
                     if (_inspectIcon)
-                        _inspectIcon.ChangeVisibility(1.0f);
+                        _inspectIcon.ChangeVisibility(1.0f, rayhit.collider.gameObject.GetComponent<ButtonScript>().GetDelay());
 
                     return;
                 }
                 else
                 if (rayhit.collider.gameObject.HasCustomTag("CameraViewer"))
                 {
+                    _mainCamera.GetComponent<CameraFollower>().FollowRotation = false;
                     _mainCamera.GetComponent<CameraFollower>().Player = rayhit.collider.gameObject.GetComponent<SurveillanceCameraScript>().LinkedObject.transform;
+                    
                     _mainCamera.orthographicSize = 7.0f;
 
                     if (_inspectIcon)
@@ -111,6 +116,7 @@ public class PlayerController : MonoBehaviour
             if (_inspectIcon)
                 _inspectIcon.ChangeVisibility(0.0f);
 
+            _mainCamera.GetComponent<CameraFollower>().FollowRotation = true;
             _mainCamera.GetComponent<CameraFollower>().Player = transform;
             _mainCamera.orthographicSize = 5.0f;
         }

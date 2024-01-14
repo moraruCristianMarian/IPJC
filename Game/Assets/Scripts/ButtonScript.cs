@@ -17,6 +17,10 @@ public class ButtonScript : MonoBehaviour
     [SerializeField]
     private float _deactivateDelay = 0.5f;
 
+    public float GetDelay()
+    => _deactivateDelay;
+
+
 
     void Start()
     {

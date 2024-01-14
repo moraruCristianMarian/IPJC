@@ -7,6 +7,8 @@ public class ItemCollector : MonoBehaviour
 {
     [SerializeField] private AudioSource winSoundEffect;
     [SerializeField] private AudioSource collectSoundEffect;
+    [SerializeField] private ProgressManager progressManager;
+    [SerializeField] private Timer timer;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -43,6 +45,10 @@ public class ItemCollector : MonoBehaviour
     }
 
     private void CompleteLevel() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        Scene scene = SceneManager.GetActiveScene();
+        string levelName = scene.name;
+        string levelTime = timer.timeText.text;
+        progressManager.SaveToJson(levelName, levelTime);
+        SceneManager.LoadScene(scene.buildIndex + 1);
     }
 }

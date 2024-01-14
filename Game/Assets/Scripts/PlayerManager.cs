@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    private string filePath = Application.dataPath + "/Data/PlayersDataFile.json";
+    private string filePath = Application.dataPath + "/PlayersDataFile.json";
     
     public string CurrentPlayer
     {
